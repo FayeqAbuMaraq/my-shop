@@ -1,131 +1,250 @@
-body {
-    font-family: 'Cairo', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+/* =========================================
+   إعدادات عامة ومتغيرات الألوان
+   ========================================= */
+:root {
+    --primary-color: #0d6efd; /* لون أساسي أزرق احترافي */
+    --primary-hover: #0b5ed7;
+    --dark-color: #212529;
+    --light-bg: #f8f9fa;
+    --transition: all 0.3s ease-in-out;
 }
 
+html {
+    scroll-behavior: smooth; /* حركة تمرير ناعمة للصفحة */
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #fcfcfc;
+    color: var(--dark-color);
+}
+
+/* عناوين الأقسام */
+.section-title h2 {
+    color: var(--dark-color);
+}
+.title-line {
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+    margin-top: 10px;
+}
+
+/* =========================================
+   شريط الملاحة (Navbar)
+   ========================================= */
 .navbar {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
 }
 
 .navbar .nav-link {
-    color: #333;
-    font-weight: bold;
-    margin: 0 10px;
+    color: #555;
+    font-weight: 600;
+    margin: 0 5px;
+    position: relative;
+    transition: var(--transition);
 }
 
+.navbar .nav-link:hover, 
+.navbar .nav-link.active {
+    color: var(--primary-color);
+}
+
+/* خط سفلي يظهر عند التمرير على الروابط */
+.navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+    width: 80%;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+/* =========================================
+   قسم البانر الرئيسي (Hero Section)
+   ========================================= */
 .hero {
     background: url('../../img/pexels-solliefoto-298863.jpg') center center / cover no-repeat;
-    height: 90vh;
+    height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    text-shadow: 2px 2px 6px #000;
+    color: #ffffff;
 }
 
-.hero h1 {
-    font-size: 60px;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 20px;
-    border-radius: 10px;
+/* طبقة شفافة داكنة فوق الصورة لجعل النص مقروءاً */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
 }
 
-.dept-section {
-    padding: 50px 0;
+.hero h1, .hero p {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
-.dept-section h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    color: #4a4a4a;
-}
-
+/* =========================================
+   قسم الأقسام (Departments)
+   ========================================= */
 .card-dept {
+    background: transparent;
     border: none;
-    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.card-dept:hover {
+    transform: translateY(-8px);
 }
 
 .card-dept img {
     border-radius: 50%;
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     object-fit: cover;
-    margin-bottom: 10px;
-    right: 28px;
-    position: relative;
+    margin: 0 auto; /* التوسيط الصحيح بدون استخدام right */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 3px solid #fff;
+    transition: var(--transition);
 }
 
-.top-products {
-    background-color: #f1f1f1;
-    padding: 50px 0;
+.card-dept:hover img {
+    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.2);
+    border-color: var(--primary-color);
 }
 
+/* =========================================
+   قسم المنتجات المميزة (Top Products)
+   ========================================= */
 .product-card {
-    border: none;
-    transition: transform 0.3s;
+    transition: var(--transition);
 }
 
 .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
 }
 
+.product-img-wrap {
+    height: 250px; /* توحيد ارتفاع صور المنتجات */
+    overflow: hidden;
+}
+
+.product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img-wrap img {
+    transform: scale(1.05); /* تكبير ناعم للصورة عند التمرير */
+}
+
+/* تأثير التظليل والزر فوق الصورة */
 .product-card .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    border-radius: 10px;
+    visibility: hidden;
+    transition: var(--transition);
 }
 
 .product-card:hover .overlay {
     opacity: 1;
+    visibility: visible;
 }
 
-.product-card .overlay a {
-    background-color: #fff;
-    color: #000;
-    padding: 8px 16px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-footer {
-    background-color: #333;
+.product-card .overlay a:hover {
+    background-color: var(--primary-color);
     color: #fff;
-    padding: 40px 0 20px;
 }
 
-footer h5 {
-    margin-bottom: 20px;
+/* =========================================
+   تنسيقات الفوتر (Footer)
+   ========================================= */
+footer {
+    background-color: #1a1a1a;
+    font-size: 0.95rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+    transform: translateX(-5px); /* حركة خفيفة لليسار عند التمرير */
 }
 
 .social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
     color: #fff;
-    margin: 0 10px;
-    font-size: 20px;
+    border-radius: 50%;
+    margin-inline-end: 10px;
+    text-decoration: none;
+    transition: var(--transition);
 }
 
+.social-icons a:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   زر العودة للأعلى (Back To Top)
+   ========================================= */
 #backToTopBtn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #2d2d2d;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     font-size: 20px;
-    z-index: 999;
+    z-index: 99;
     cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#backToTopBtn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-5px);
 }
